@@ -1,19 +1,4 @@
-export default function({types: t }) {
-  let valueToAst = value => {
-    if (typeof value === 'string') {
-      return t.stringLiteral(value);
-    }
-
-    if (typeof value === 'object') {
-      let properties = Object.keys(value).map(key => {
-        let id = t.isValidIdentifier(key) ? t.identifier(key) : t.stringLiteral(key)
-        return t.objectProperty(id, valueToAst(value[key]));
-      });
-
-      return t.objectExpression(properties);
-    }
-  };
-
+export default function({ types: t }) {
   return {
     visitor: {
       ImportDeclaration(path) {
@@ -73,7 +58,7 @@ export default function({types: t }) {
 
             let serializedArgs = args.map(arg => arg.node.value);
             let result = matchedMethod(...serializedArgs);
-            let resultAst = valueToAst(result);
+            let resultAst = t.valueToNode(result);
 
             callExpression.replaceWith(resultAst);
             return false;
