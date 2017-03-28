@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-polished",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Compile away polished helpers",
   "repository": "thejameskyle/babel-plugin-polished",
   "author": "James Kyle <me@thejameskyle.com>",
