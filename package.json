@@ -2,7 +2,8 @@
   "name": "babel-plugin-polished",
   "version": "1.0.0",
   "description": "Compile away polished helpers",
-  "repository": "thejameskyle/babel-plugin-polished",
+  "repository": "styled-components/babel-plugin-polished",
+  "license": "MIT",
   "author": "James Kyle <me@thejameskyle.com>",
   "main": "lib/index.js",
   "devDependencies": {
