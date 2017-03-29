@@ -2,16 +2,16 @@ export default function({ types: t }) {
   return {
     visitor: {
       ImportDeclaration(path) {
-        let source = path.get('source');
-        let sourceValue = source.node.value;
-        let specifiers = path.get('specifiers');
+        const source = path.get('source');
+        const sourceValue = source.node.value;
+        const specifiers = path.get('specifiers');
 
         if (sourceValue.indexOf('polished') !== 0) return;
 
-        let safeSourceValue = sourceValue.replace(/^polished\/src/, 'polished/lib')
-        let importedModule = require(safeSourceValue);
+        const safeSourceValue = sourceValue.replace(/^polished\/src/, 'polished/lib')
+        const importedModule = require(safeSourceValue);
 
-        let invalidatedSpecifiers = specifiers.filter(specifier => {
+        const invalidatedSpecifiers = specifiers.filter(specifier => {
           let importedValue = importedModule;
 
           if (specifier.node.imported) {
@@ -26,11 +26,11 @@ export default function({ types: t }) {
             importedValue = value;
           }
 
-          let local = specifier.get('local');
-          let binding = local.scope.getBinding(local.node.name);
-          let refs = binding.referencePaths;
+          const local = specifier.get('local');
+          const binding = local.scope.getBinding(local.node.name);
+          const refs = binding.referencePaths;
 
-          let invalidatedRefs = refs.filter(ref => {
+          const invalidatedRefs = refs.filter(ref => {
             let matchedMethod = importedValue;
 
             let callExpression = ref.findParent(parent => {
