@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-polished",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Compile away polished helpers",
   "repository": "styled-components/babel-plugin-polished",
   "license": "MIT",
