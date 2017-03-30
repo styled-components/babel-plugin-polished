@@ -20,7 +20,7 @@ export default function({ types: t }) {
             let value = importedValue[importedName];
 
             if (!value) {
-              throw imported.buildCodeFrameError('Method does not exist: ' + methodName);
+              throw imported.buildCodeFrameError('Method does not exist: ' + importedName);
             }
 
             importedValue = value;
