@@ -1,7 +1,30 @@
-export default function({ types: t }) {
+// @flow
+'use strict';
+
+const unsafeRequire = require;
+
+/*::
+type Types = {
+  valueToNode(mixed): Node,
+};
+
+type Node = {
+  type: string,
+  [key: string]: any,
+};
+
+type Path = {
+  type: string,
+  node: Node,
+  [key: string]: any,
+};
+*/
+
+module.exports = ({ types: t } /*: { types: Types } */) => {
   return {
+    name: 'polished',
     visitor: {
-      ImportDeclaration(path) {
+      ImportDeclaration(path /*: Path */) {
         let source = path.get('source');
         let sourceValue = source.node.value;
         let specifiers = path.get('specifiers');
@@ -9,7 +32,7 @@ export default function({ types: t }) {
         if (sourceValue.indexOf('polished') !== 0) return;
 
         let safeSourceValue = sourceValue.replace(/^polished\/src/, 'polished/lib')
-        let importedModule = require(safeSourceValue);
+        let importedModule = unsafeRequire(safeSourceValue);
 
         let invalidatedSpecifiers = specifiers.filter(specifier => {
           let importedValue = importedModule;
@@ -56,7 +79,14 @@ export default function({ types: t }) {
             let foundNonLiteral = args.find(arg => !arg.isLiteral());
             if (foundNonLiteral) return true;
 
-            let serializedArgs = args.map(arg => arg.node.value);
+            let serializedArgs = args.map(arg => {
+              if (arg.isNullLiteral()) {
+                return null;
+              } else {
+                return arg.node.value
+              }
+            });
+
             let result = matchedMethod(...serializedArgs);
             let resultAst = t.valueToNode(result);
 
