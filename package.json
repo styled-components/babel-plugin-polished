@@ -5,7 +5,8 @@
   "repository": "styled-components/babel-plugin-polished",
   "license": "MIT",
   "author": "James Kyle <me@thejameskyle.com>",
-  "main": "lib/index.js",
+  "main": "index.js",
+  "files": [],
   "keywords": [
     "polished",
     "styled",
