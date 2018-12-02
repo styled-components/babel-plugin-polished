@@ -16,11 +16,14 @@
   "scripts": {
     "test": "jest"
   },
-  "dependencies": {
-    "polished": "^1.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-plugin-tester": "^3.0.0",
-    "flow-bin": "^0.47.0"
+    "flow-bin": "^0.47.0",
+    "jest": "^23.6.0",
+    "polished": "1.0.0"
+  },
+  "peerDependencies": {
+    "polished": "^1.0.0"
   }
 }
